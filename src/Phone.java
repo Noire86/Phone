@@ -81,9 +81,10 @@ public class Phone {
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean isMenuActive = true;
+        int input = 0;
 
 
-        while (isMenuActive) {
+        while (isMenuActive && scanner.hasNextInt()) {
             System.out.println("This is the main menu. Please provide the number of the needed menu section:\n" +
                     "1. Print all contacts\n" +
                     "2. Add new contact\n" +
@@ -91,8 +92,7 @@ public class Phone {
                     "4. Remove contact\n" +
                     "5. Quit menu");
 
-            int input = scanner.nextInt();
-
+            input = scanner.nextInt();
 
             switch (input) {
                 case 1:
@@ -144,7 +144,6 @@ public class Phone {
                     System.out.println("Please enter the correct menu value!");
             }
         }
-
     }
 
     private Contact getContactByName(String name) {

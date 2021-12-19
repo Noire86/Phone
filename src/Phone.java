@@ -84,7 +84,7 @@ public class Phone {
         int input = 0;
 
 
-        while (isMenuActive && scanner.hasNextInt()) {
+        while (isMenuActive) {
             System.out.println("This is the main menu. Please provide the number of the needed menu section:\n" +
                     "1. Print all contacts\n" +
                     "2. Add new contact\n" +

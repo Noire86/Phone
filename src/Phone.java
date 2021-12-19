@@ -81,10 +81,10 @@ public class Phone {
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean isMenuActive = true;
-        String input;
+        int input;
 
 
-        while (isMenuActive) {
+        loop: while (isMenuActive) {
             System.out.println("This is the main menu. Please provide the number of the needed menu section:\n" +
                     "1. Print all contacts\n" +
                     "2. Add new contact\n" +
@@ -92,21 +92,25 @@ public class Phone {
                     "4. Remove contact\n" +
                     "5. Quit menu");
 
-            input = scanner.nextLine();
+            if (scanner.hasNextInt()) {
+                input = scanner.nextInt();
+            } else {
+                input = 0;
+            }
 
             switch (input) {
-                case "1":
+                case 1:
                     System.out.println("Printing all contacts:");
                     printAll();
                     break;
-                case "2":
+                case 2:
                     System.out.println("Please input the contact name:");
                     String name = scanner.next();
                     System.out.println("Please input the phone number:");
                     String phoneNumber = scanner.next();
                     addContact(name, phoneNumber);
                     break;
-                case "3":
+                case 3:
                     System.out.println("Please select the contact you wish to edit:");
                     String contactName = scanner.next();
                     if (!ifExists(contactName)) {
@@ -114,15 +118,15 @@ public class Phone {
                         break;
                     }
                     System.out.println("What option do you want to edit? 1. Name 2. Phone number");
-                    int var = scanner.nextInt();
+                    String var = scanner.nextLine();
 
                     switch (var) {
-                        case 1:
+                        case "1":
                             System.out.println("Please enter a new name for the contact:");
                             String newName = scanner.next();
                             editName(contactName, newName);
                             break;
-                        case 2:
+                        case "2":
                             System.out.println("Please enter a new number for the contact:");
                             String newNumber = scanner.next();
                             editNumber(contactName, newNumber);
@@ -131,17 +135,19 @@ public class Phone {
                             System.out.println("Please enter a value 1 or 2");
                     }
                     break;
-                case "4":
+                case 4:
                     System.out.println("Please enter the contact name you wish to remove:");
                     String removingContact = scanner.next();
                     removeContact(removingContact);
                     break;
-                case "5":
+                case 5:
                     System.out.println("Exiting menu...");
                     isMenuActive = false;
                     break;
                 default:
                     System.out.println("Please enter the correct menu value!");
+                    scanner.next();
+                    break;
             }
         }
     }
